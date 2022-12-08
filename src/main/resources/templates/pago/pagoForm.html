@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Pago</title>
+		<link rel="stylesheet" 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+			integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
+			crossorigin="anonymous">
+	</head>
+	<body>
+		<nav th:replace="menu-nav :: menuNavegacion"></nav>
+		<div class = "container text-center">
+			<h1 class="text-secondary border border-success border-top-0 border-left-0 border-right-0">Detalles de pago</h1>
+		</div>
+		<div class = "container">
+			<table class="table table-striped table-bordered">
+				<thead class="table-primary">
+					<tr class= "table-active">
+						<th>Producto</th>
+						<th>Cantidad</th>
+						<th>$</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="p : ${lista}">
+						<td th:text="${p.producto?.nombre}"></td>
+						<td th:text="${p.cantidadPiezas}"></td>
+						<td th:text="${p.subtotalPagar}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<h2 class="text-right text-muted" th:text="'Total $' + ${pedido.totalPagar}"></h2><hr>
+			<form th:action="@{/pago/crear/} + ${pedido.id}" th:object="${pago}" method="post">
+	            <div class="form-group">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm"><label for="nombre">Nombre completo: </label></div>
+							<div class="col-sm"><input type="text" th:field="*{nombre}" id="nombre" class="form-control" required="Ingresa tu nombre completo"></div>
+						</div><br>
+						<div class="row">
+							<div class="col-sm"><label for="tarjeta">Número de tarjeta: </label></div>
+							<div class="col-sm"><input type="number" th:field="*{numTarjeta}" id="tarjeta" class="form-control" required="Ingresa una tarjeta de crédito"></div>
+							<div class="col-sm"><label for="cvv">CVV: </label></div>
+							<div class="col-sm"><input type="number" th:field="*{cvv}" id="cvv" class="form-control" required="Ingresa el código cvv"></div>
+						</div>
+					</div>
+	            	<label for="info">Información adicional: </label>
+					<textarea class="form-control" id="info" rows="7" th:field="*{infoAdicional}"></textarea><br>
+					<div class="container text-center">
+	            		<input type="submit" value="Completar compra" class="btn btn-success"/>
+	            	</div>
+	            </div>
+			</form>
+		</div>
+	</body>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" 
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" 
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" 
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
+		crossorigin="anonymous"></script>
+</html>

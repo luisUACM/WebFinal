@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="${titulo}"></title>
+		<link rel="stylesheet" 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+			integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
+			crossorigin="anonymous">
+	</head>
+	<body>
+		<nav th:replace="menu-nav :: menuNavegacion"></nav>
+		<div class = "container text-center">
+			<h1 class="text-secondary border border-success border-top-0 border-left-0 border-right-0" th:text="${titulo}"></h1>
+		</div>
+			<div class="container">
+			<th:block th:if="${esCliente}">
+				<form th:action="'/cliente/crear'" th:object="${cliente}" method="post">
+					<div class="form-group">
+			        	<div class="row">
+				            <div class="col-sm"><label for="nombre">Nombre completo: </label></div>
+				            <div class="col-sm"><input type="text" class="form-control" id="nombre" th:field="*{nombre}" required="Ingresa tu nombre"/></div>
+				            <div class="col-sm"><input type="text" class="form-control" th:field="*{appaterno}" required="Ingresa tu apellido"/></div>
+				            <div class="col-sm"><input type="text" class="form-control" th:field="*{apmaterno}"/></div>
+						</div><br>
+				        <div class="row">
+				            <div class="col-sm"><label for="correo">Correo: </label></div>
+				            <div class="col-sm"><input type="email" class="form-control" id="correo" th:field="*{correo}" required="Ingresa tu correo"/></div>
+				            <div class="col-sm"><label for="pass">Contraseña: </label></div>
+				            <div class="col-sm"><input type="password" class="form-control" id="pass" th:field="*{contrasena}" required="Ingresa tu contraseña"/></div>
+						</div><br>
+				        <div class="row">
+				            <div class="col-sm"></div>
+				            <div class="col-sm"><label for="username">Nombre de usuario: </label></div>
+				            <div class="col-sm"><input type="text" class="form-control" id="username" th:field="*{username}" required="Ingresa tu nombre de usuario"/></div>
+				            <div class="col-sm"></div>
+						</div>
+					</div>
+			        <div class="container text-center">
+			            <input th:if="${esNuevo}" type="submit" value="Registrar" class="btn btn-success"/>
+			            <input th:if="${!esNuevo}" type="submit" value="Guardar" class="btn btn-success"/>
+			        </div>
+			        <input type="hidden" th:field="*{id}">
+				</form>
+			</th:block>
+		</div>
+		<div class="container">
+			<th:block th:if="${!esCliente}">
+				<form th:action="'/vendedor/crear'" th:object="${vendedor}" method="post">
+					<div class="form-group">
+			        	<div class="row">
+				            <div class="col-sm"><label for="nombre">Nombre completo: </label></div>
+				            <div class="col-sm"><input type="text" class="form-control" id="nombre" th:field="*{nombre}" required="Ingresa tu nombre"/></div>
+				            <div class="col-sm"><input type="text" class="form-control" th:field="*{appaterno}" required="Ingresa tu apellido"/></div>
+				            <div class="col-sm"><input type="text" class="form-control" th:field="*{apmaterno}"/></div>
+						</div><br>
+				        <div class="row">
+				            <div class="col-sm"><label for="correo">Correo: </label></div>
+				            <div class="col-sm"><input type="email" class="form-control" id="correo" th:field="*{correo}" required="Ingresa tu correo"/></div>
+				            <div class="col-sm"><label for="pass">Contraseña: </label></div>
+				            <div class="col-sm"><input type="password" class="form-control" id="pass" th:field="*{contrasena}" required="Ingresa tu contraseña"/></div>
+						</div><br>
+				        <div class="row">
+				            <div class="col-sm"></div>
+				            <div class="col-sm"><label for="username">Nombre de usuario: </label></div>
+
+				            <div class="col-sm"><input type="text" class="form-control" id="username" th:field="*{username}" required="Ingresa tu nombre de usuario"/></div>
+				            <div class="col-sm"></div>
+						</div>
+					</div>
+			        <div class="container text-center">
+			            <input th:if="${esNuevo}" type="submit" value="Registrar" class="btn btn-success"/>
+			            <input th:if="${!esNuevo}" type="submit" value="Guardar" class="btn btn-success"/>
+			        </div>
+			        <input type="hidden" th:field="*{id}">
+				</form>
+			</th:block>
+		</div>
+	</body>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" 
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" 
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" 
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
+		crossorigin="anonymous"></script>
+</html>
